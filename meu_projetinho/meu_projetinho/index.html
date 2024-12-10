@@ -3,151 +3,407 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
+    <link rel="stylesheet" href="style.css">
     <title>Paradise Game</title>
+    <style>
+        body {
+font-family: Arial, sans-serif;
+margin: 0;
+padding: 0;
+background-color: #000000;
+color: #fff;
+}
+
+header {
+background-color: #333;
+color: #fff;
+padding: 10px 20px;
+text-align: center;
+position: relative;
+}
+
+header h1 {
+margin: 0;
+}
+
+nav ul {
+list-style: none;
+padding: 0;
+margin: 10px 0;
+}
+
+nav ul li {
+display: inline;
+margin-right: 15px;
+}
+
+nav ul li a {
+transition: color 0.5 ease;
+color: #ffffff;
+text-decoration: none;
+}
+a{
+transition: color 0.5s ease;
+text-decoration: none;
+color: #ffffff;
+}
+a:hover {
+color: #ffffff; /* Cor do link ao passar o mouse */
+}
+
+a:hover {
+color: #0400ff; /* Alterna para outra cor */
+}
+
+.cadastro {
+position: absolute; /* Posiciona o elemento em relação ao documento */
+top: 25px;         /* Distância do topo */
+right: 200px;       /* Distância da direita */
+}
+
+.cadastro button {
+font-size: 20px;
+padding: 10px 30px;
+border-radius: 5px;
+border: none;
+background-color: #000000;
+color: #fff;
+cursor: pointer;
+transition: all 0.3s ease; /* Define a transição suave */
+}
+
+.cadastro button:hover {
+transform: scale(1.1); /* Aumenta o tamanho do botão */
+color: #2a28a7; /* Muda o texto para amarelo (luz) */
+}
+
+.login {
+position: absolute; /* Posiciona o elemento em relação ao documento */
+top: 25px;         /* Distância do topo */
+right: 30px;       /* Distância da direita */
+}
+
+.login button {
+font-size: 20px;
+padding: 10px 50px;
+border-radius: 5px;
+border: none;
+background-color: #000000;
+color: #fff;
+cursor: pointer;
+transition: all 0.3s ease; /* Define a transição suave */
+}
+
+.login button:hover {
+transform: scale(1.1); /* Aumenta o tamanho do botão */
+color: #2a28a7; /* Muda o texto para amarelo (luz) */
+}
+
+.container {
+padding: 20px;
+max-width: 1200px;
+margin: 0 auto;
+}
+
+.category {
+margin-bottom: 40px;
+}
+
+.category h2 {
+border-bottom: 2px solid #0400ff;
+padding-bottom: 10px;
+margin-bottom: 20px;
+color: #ffffff;
+animation: colorTransition 6s infinite; /* Animação com duração de 3 segundos */
+}
+
+/* Alterado para grid */
+.game-grid {
+display: grid;
+grid-template-columns: repeat(5, 1fr); /* 5 colunas */
+gap: 20px; /* Espaço entre os jogos */
+}
+
+.game {
+display: flex;
+flex-direction: column;
+justify-content: space-between; /* Distribui os elementos verticalmente */
+background: #fff;
+border-radius: 8px;
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+padding: 4px;
+text-align: center;
+height: 100%; /* Garante que os jogos tenham a mesma altura */
+}
+
+.game-grid {
+display: grid;
+grid-template-columns: repeat(5, 1fr); /* Garante consistência na grade */
+gap: 20px; /* Espaço entre os jogos */
+}
+
+.game .read-more {
+margin-top: auto; /* Empurra o botão para o final do contêiner */
+align-self: center; /* Centraliza horizontalmente */
+}
+
+.game button,
+.game .read-more {
+align-self: center; /* Centraliza horizontalmente */
+background-color: #3128a7; /* Cor de fundo */
+border: none; /* Remove bordas */
+color: white; /* Cor do texto */
+padding: 8px 16px; /* Espaçamento interno */
+text-align: center;
+text-decoration: none;
+font-size: 14px; /* Tamanho da fonte */
+margin-top: 10px;
+border-radius: 5px; /* Arredonda os cantos */
+cursor: pointer; /* Define o cursor como pointer */
+}
+
+.game button:hover,
+.game .read-more:hover {
+background-color: #1f1b6d; /* Altera a cor no hover */
+}
+
+.game img {
+width: 100%;
+height: auto;
+aspect-ratio: 16/9; /* Ajustado para uma proporção mais comum */
+border-radius: 8px;
+}
+
+.game h3 {
+margin: 10px 0;
+font-size: 18px;
+color: #000;
+}
+
+.game p {
+font-size: 14px;
+color: #555;
+margin: 0;
+overflow: hidden;
+transition: max-height 0.3s ease;
+}
+.game .price {
+font-size: 18px;
+color: #28a745;
+margin: 10px 0;
+}
+
+.description {
+max-height: 60px; /* Define a altura máxima do texto quando está oculto */
+overflow: hidden;
+transition: max-height 0.3s ease;
+}
+
+.description.expanded {
+max-height: 1000px; /* Um valor grande o suficiente para exibir todo o conteúdo */
+}
+
+footer {
+padding: 10px 0;
+background: #333;
+color: rgb(255, 255, 255);
+margin-top: 20px;
+}
+/* Ajustes para responsividade */
+@media (max-width: 1200px) {
+.game-grid {
+    grid-template-columns: repeat(4, 1fr); /* 4 colunas em telas menores */
+}
+}
+
+@media (max-width: 900px) {
+.game-grid {
+    grid-template-columns: repeat(3, 1fr); /* 3 colunas em telas menores */
+}
+}
+
+@media (max-width: 600px) {
+.game-grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 colunas em telas menores */
+}
+}
+
+@media (max-width: 480px) {
+.game-grid {
+    grid-template-columns: 1fr; /* 1 coluna em telas menores */
+}
+}
+/* Definição da animação */
+@keyframes colorTransition {
+0%, 100% {
+    color: #ffffff; /* Cor inicial e final: branco */
+}
+50% {
+    color: #332ffa; /* Cor intermediária: azul */
+}
+}
+    </style>
     <header>
         <h1>Catálogo de Jogos Online</h1>
         <nav>
             <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="contato.html">Contato</a></li>
-                <li><a href="mais_sobre.html">Mais sobre</a></li>
-                <li><a href="termos_de_servico.html">Termos de Serviço</a></li>
-                <li><a href="politica_privacidade.html">Política de privacidade</a></li>
+                <li><a href="index.php">Home</a></li>
+                <li><a href="contato.php">Contato</a></li>
+                <li><a href="termos_de_servico.php">Termos de Serviço</a></li>
+                <li><a href="politica_privacidade.php">Política de privacidade</a></li>
             </ul>
         </nav>
         <div class="cadastro">
-            <button>Cadastrar</button>
+            <a href="cadastro.php"><button>Cadastrar</button></a>
+        </div>
+        <div class="login">
+            <a href="login.php"><button>Login</button></a>
         </div>
     </header>
-
+    <span style="white-space: pre-line">
 <div class="container">
     <!-- Categoria: Ação -->
     <div class="category">
         <h2>Ação</h2>
         <div class="game-grid">
             <div class="game">
-                <img src="img/DOOM_Eternal_capa.jpg" alt="DOOM Eternal">
-                <h3>DOOM Eternal</h3>
-                <p class="description">Um jogo de tiro em primeira pessoa intenso, onde você deve enfrentar hordas de demônios.</p>
+                <img src="img/gow_capa.jpg" alt="DOOM Eternal">
+                <h3>God of War</h3>
+                <p class="description">Após se afastar de seu passado violento como deus da guerra na mitologia grega, Kratos vive agora em Midgard, no mundo da mitologia nórdica. Recluso e buscando redenção, ele tenta levar uma vida tranquila ao lado de seu filho, Atreus, após a morte de sua esposa, Faye. Antes de partir, ela deixa um último desejo: que suas cinzas sejam espalhadas no ponto mais alto dos nove reinos.
+                    A jornada de pai e filho revela-se mais perigosa do que o esperado, com criaturas míticas, deuses nórdicos hostis e desafios emocionais que testam a relação entre os dois. Enquanto Kratos luta para ensinar a Atreus sobre sobrevivência e responsabilidade, ele também precisa enfrentar seu próprio passado sombrio e os segredos sobre o verdadeiro destino de sua família.</p>
                 <button class="read-more">Ler mais</button>
-                <div class="price">R$ 89,90</div>
-                <button><a href=""></a>Comprar Agora</button>
+                <div class="price">R$ 199,90</div>
+                <a href="https://store.steampowered.com/app/1593500/God_of_War/"><button>Comprar Agora</button></a>
             </div>
             <div class="game">
                 <img src="img/DOOM_Eternal_capa.jpg" alt="DOOM Eternal">
                 <h3>DOOM Eternal</h3>
-                <p class="description">Um jogo de tiro em primeira pessoa intenso, onde você deve enfrentar hordas de demônios.</p>
+                <p class="description">A humanidade está à beira da extinção. A Terra foi devastada por uma invasão demoníaca, e a última esperança para deter a aniquilação é o Slayer, um guerreiro lendário que retorna mais poderoso e preparado do que nunca.
+                    Em DOOM Eternal, você assume o papel do Doom Slayer, embarcando em uma missão brutal para acabar com as hordas infernais e retomar o controle do planeta. Viajando por dimensões, desde paisagens desoladas na Terra até os domínios mais profundos do Inferno, o Slayer enfrentará demônios ainda mais poderosos, armando-se com tecnologia avançada e habilidades aprimoradas.</p>
                 <button class="read-more">Ler mais</button>
-                <div class="price">R$ 89,90</div>
-                <button>Comprar Agora</button>
+                <div class="price">R$ R$ 149,00</div>
+                <a href="https://store.steampowered.com/app/782330/DOOM_Eternal/"><button>Comprar Agora</button></a>
             </div>
             <div class="game">
                 <img src="img/Devil_May_Cry_5_capa.jpg" alt="Devil May Cry 5">
                 <h3>Devil May Cry 5</h3>
-                <p class="description">A aventura de Dante e seus amigos retorna com combate visceral e visuais impressionantes.</p>
+                <p class="description">Em Devil May Cry 5, o mundo está mais uma vez à beira do caos quando uma árvore demoníaca conhecida como Qlipoth surge misteriosamente em Red Grave City, drenando a vida dos habitantes para alimentar sua ascensão. A trama segue três protagonistas únicos: Nero, um jovem caçador de demônios determinado a recuperar seu braço demoníaco perdido e salvar aqueles que ama; Dante, o lendário caçador de demônios, em uma luta pessoal para proteger o mundo e confrontar seu passado; e V, um misterioso e enigmático novo personagem que esconde segredos sombrios.
+                    À medida que os destinos dos três se entrelaçam, eles enfrentam hordas de demônios, cada um com suas próprias habilidades e estilos de combate, e encaram a ameaça de um poderoso rei demoníaco, Urizen, que planeja dominar o mundo humano</p>
                 <button class="read-more">Ler mais</button>
-                <div class="price">R$ 99,90</div>
-                <button>Comprar Agora</button>
+                <div class="price">R$ R$ 99,00</div>
+                <a href="https://store.steampowered.com/app/601150/Devil_May_Cry_5/"><button>Comprar Agora</button></a>
             </div>
             <div class="game">
                 <img src="img/Far_Cry_6_capa.jpg" alt="Far Cry 6">
                 <h3>Far Cry 6</h3>
-                <p class="description">Aventure-se em uma ilha tropical como guerrilheiro lutando contra um regime opressivo.</p>
+                <p class="description">Em Far Cry 6, você é transportado para a ilha tropical fictícia de Yara, um lugar preso no tempo, governado com mão de ferro pelo ditador Antón Castillo. Prometendo devolver a glória à nação, Castillo subjuga seu povo enquanto treina seu filho, Diego, para seguir seu legado.
+                    Você assume o papel de Dani Rojas, um jovem local que pode ser personalizado como homem ou mulher, determinado a lutar contra o regime opressor. Como guerrilheiro, Dani une forças com uma resistência diversificada, utilizando armas improvisadas, veículos adaptados e aliados animais, como o adorável cão Chorizo.</p>
                 <button class="read-more">Ler mais</button>
                 <div class="price">R$ 109,90</div>
                 <button>Comprar Agora</button>
             </div>
             <div class="game">
-                <img src="img/Hitman_3_capa.jpg" alt="Hitman 3">
-                <h3>Hitman 3</h3>
-                <p class="description">Conclua a trilogia de Agente 47 com assassinatos criativos em locais deslumbrantes.</p>
+                <img src="img/Hitman_2_capa.jpg" alt="Hitman 3">
+                <h3>Hitman 2: Silent Assassin</h3>
+                <p class="description">Em Hitman 2: Silent Assassin, você assume o papel de Agente 47, um assassino de elite em busca de redenção após os eventos do jogo anterior. Tentando deixar para trás sua vida de violência, 47 se refugia em um mosteiro na Sicília, trabalhando como jardineiro e vivendo em paz. No entanto, seu passado o alcança quando o padre Vittorio, seu confidente e amigo, é sequestrado por um poderoso cartel.
+                    Para salvar o padre, 47 volta ao trabalho, aceitando missões ao redor do mundo enquanto rastreia os responsáveis pelo sequestro. A narrativa o leva a locais exóticos e perigosos, como a Rússia, o Japão, a Índia e o Oriente Médio.
+                    </p>
                 <button class="read-more">Ler mais</button>
-                <div class="price">R$ 89,90</div>
-                <button>Comprar Agora</button>
+                <div class="price">R$ R$ 22,79</div>
+                <a href="https://store.steampowered.com/app/6850/Hitman_2_Silent_Assassin/"><button>Comprar Agora</button></a>
             </div>
             <!-- Segunda fileira -->
             <div class="game">
                 <img src="img/Resident_Evil_Village_capa.jpg" alt="Resident Evil Village">
                 <h3>Resident Evil Village</h3>
-                <p class="description">Explore uma vila sombria enquanto busca por sua filha em uma atmosfera aterrorizante.</p>
+                <p class="description">Resident Evil Village é um jogo de terror e sobrevivência que dá sequência aos eventos de Resident Evil 7: Biohazard. A história acompanha Ethan Winters, um homem comum que, após os acontecimentos traumáticos do jogo anterior, tenta levar uma vida tranquila com sua esposa Mia e sua filha recém-nascida, Rose. No entanto, tudo muda quando Chris Redfield, um antigo herói da série, invade sua casa, comete atos inesperados e deixa Ethan devastado.
+Ethan é levado a uma vila remota e misteriosa, dominada por criaturas aterrorizantes e liderada por um grupo de vilões imponentes, incluindo a icônica Lady Dimitrescu, uma vampira aristocrática. Conforme Ethan explora o local, ele enfrenta desafios brutais, desvenda segredos obscuros sobre o passado da vila e luta para salvar sua filha.
+</p>
                 <button class="read-more">Ler mais</button>
-                <div class="price">R$ 99,90</div>
-                <button>Comprar Agora</button>
+                <div class="price">R$ R$ 139,00</div>
+                <a href="https://store.steampowered.com/app/1196590/Resident_Evil_Village/"><button>Comprar Agora</button></a>
             </div>
             <div class="game">
-                <img src="img/DOOM_Eternal_capa.jpg" alt="DOOM Eternal">
-                <h3>DOOM Eternal</h3>
-                <p class="description">Um jogo de tiro em primeira pessoa intenso, onde você deve enfrentar hordas de demônios.</p>
+                <img src="img/Call_of_Duty_Black_Ops_6_capa.jpg" alt="DOOM Eternal">
+                <h3>Call of Duty: Black Ops 6</h3>
+                <p class="description">Call of Duty: Black Ops 6 se passa em um período de grandes conflitos globais, misturando eventos históricos com elementos fictícios de conspiração e intriga. O jogo centra-se na equipe da CIA liderada por personagens conhecidos, como Russell Adler e Frank Woods, em uma missão para deter uma organização paramilitar chamada Pantheon. Esta organização desenvolve armas psicotrópicas experimentais com potencial catastrófico, incluindo o "Cradle", uma arma bioquímica. A narrativa combina espionagem, ação intensa e momentos psicológicos, enquanto os protagonistas enfrentam inimigos em locais variados, como o Iraque, Bulgária e Estados Unidos.</p>
                 <button class="read-more">Ler mais</button>
-                <div class="price">R$ 89,90</div>
-                <button>Comprar Agora</button>
+                <div class="price">R$ 339,00</div>
+                <a href="https://store.steampowered.com/app/2933620/Call_of_Duty_Black_Ops_6/"><button>Comprar Agora</button></a>
             </div>
             <div class="game">
                 <img src="img/Assassins_Creed_Valhalla_capa.jpg" alt="Assassin's Creed Valhalla">
                 <h3>Assassin's Creed Valhalla</h3>
-                <p class="description">Viva como um vikings em uma história épica de conquista e exploração na Inglaterra medieval.</p>
+                <p class="description">
+                    Assassin's Creed Valhalla é um RPG de ação e aventura que transporta os jogadores para o mundo brutal e vibrante da Era Viking. Você assume o papel de Eivor, um guerreiro viking que lidera seu clã em busca de um novo lar nas terras da Inglaterra do século IX, em meio ao caos dos reinos em guerra.
+                    Enquanto explora vastas paisagens, constrói assentamentos e participa de batalhas épicas, Eivor precisa equilibrar lealdades familiares, alianças políticas e a busca por glória.</p>
                 <button class="read-more">Ler mais</button>
                 <div class="price">R$ 109,90</div>
-                <button>Comprar Agora</button>
+                <a href="https://store.steampowered.com/app/2208920/Assassins_Creed_Valhalla/"><button>Comprar Agora</button></a>
             </div>
             <div class="game">
-                <img src="img/Just_Cause_4_capa.jpg" alt="Just Cause 4">
-                <h3>Just Cause 4</h3>
-                <p class="description">Caos absoluto em um mundo aberto, com possibilidades infinitas para destruição.</p>
+                <img src="img/Just_Cause_4_Reloaded_capa.jpg" alt="Just Cause 4">
+                <h3>Just Cause 4 Reloaded</h3>
+                <p class="description">Just Cause 4 Reloaded é uma versão aprimorada do famoso jogo de ação e aventura em mundo aberto. Você assume o papel de Rico Rodriguez, um agente rebelde em busca de respostas sobre o passado de sua família e determinado a enfrentar a organização paramilitar conhecida como Mão Negra. A história se passa na ilha fictícia de Solís, localizada na América do Sul, um vasto território marcado por paisagens exóticas, clima extremo e regimes opressivos.</p>
                 <button class="read-more">Ler mais</button>
-                <div class="price">R$ 89,90</div>
-                <button>Comprar Agora</button>
+                <div class="price">R$ 172,95</div>
+                <a href="https://store.steampowered.com/app/517630/Just_Cause_4_Reloaded/"><button>Comprar Agora</button></a>
             </div>
             <div class="game">
                 <img src="img/Borderlands_3_capa.jpg" alt="Borderlands 3">
                 <h3>Borderlands 3</h3>
-                <p class="description">Um shooter looter com um estilo único e humor, repleto de ação e personagens excêntricos.</p>
+                <p class="description">
+                    Borderlands 3 é um jogo de tiro em primeira pessoa, desenvolvido pela Gearbox Software, ambientado em um mundo pós-apocalíptico cheio de caos, humor irreverente e ação frenética. A história segue os "Vault Hunters", um grupo de mercenários, enquanto eles tentam deter os gêmeos Calypso, líderes de uma seita chamada "Children of the Vault", que buscam controlar o poder dos Vaults, locais secretos repletos de riquezas e tecnologia alienígena.</p>
                 <button class="read-more">Ler mais</button>
-                <div class="price">R$ 99,90</div>
-                <button>Comprar Agora</button>
+                <div class="price">R$ 119,90</div>
+                <a href="https://store.steampowered.com/app/397540/Borderlands_3/"><button>Comprar Agora</button></a>
             </div>
             <!-- Terceira fileira -->
             <div class="game">
                 <img src="img/Call_of_Duty_Modern_Warfare_capa.jpg" alt="Call of Duty: Modern Warfare">
                 <h3>Call of Duty: Modern Warfare</h3>
-                <p class="description">Um dos melhores jogos de tiro em primeira pessoa, focado em uma narrativa intensa e multiplayer emocionante.</p>
+                <p class="description">Call of Duty: Modern Warfare é um jogo de tiro em primeira pessoa que faz parte da icônica franquia Call of Duty. Lançado em 2019, o jogo oferece uma experiência de combate intensa e realista, situando os jogadores em um cenário moderno de guerra global. A trama acompanha uma equipe de forças especiais, liderada pelo Capitão Price, enquanto enfrentam ameaças terroristas e situações de guerra clandestina em diversos pontos do mundo, como Oriente Médio e Europa.</p>
                 <button class="read-more">Ler mais</button>
-                <div class="price">R$ 129,90</div>
-                <button>Comprar Agora</button>
+                <div class="price">R$ 274,00</div>
+                <a href="https://store.steampowered.com/app/2000950/Call_of_Duty_Modern_Warfare/"><button>Comprar Agora</button></a>
             </div>
             <div class="game">
-                <img src="img/Call_of_Duty_Modern_Warfare_capa.jpg" alt="Call of Duty: Modern Warfare">
-                <h3>Call of Duty: Modern Warfare</h3>
-                <p class="description">Um dos melhores jogos de tiro em primeira pessoa, focado em uma narrativa intensa e multiplayer emocionante.</p>
+                <img src="img/GTA_5_capa.jpg" alt="Call of Duty: Modern Warfare">
+                <h3>Grand Theft Auto V</h3>
+                <p class="description">Grand Theft Auto V (GTA V) é um jogo de ação e aventura desenvolvido pela Rockstar North e lançado em 2013. Ambientado na fictícia cidade de Los Santos, uma recriação de Los Angeles, o jogo segue três protagonistas: Michael De Santa, um ex-ladrão de banco que vive uma vida de luxo, Trevor Philips, um ex-militar psicopata e imprevisível, e Franklin Clinton, um jovem que busca uma vida melhor longe das ruas.
+                    A história se desenrola em uma série de assaltos e confrontos com criminosos, autoridades e gangues, enquanto os personagens buscam seu próprio caminho no submundo do crime.</p>
                 <button class="read-more">Ler mais</button>
-                <div class="price">R$ 129,90</div>
-                <button>Comprar Agora</button>
+                <div class="price">R$ 82,41</div>
+                <a href="https://store.steampowered.com/app/271590/Grand_Theft_Auto_V/"><button>Comprar Agora</button></a>
             </div>
             <div class="game">
                 <img src="img/Overwatch_2_capa.jpg" alt="Overwatch 2">
                 <h3>Overwatch 2</h3>
-                <p class="description">Um jogo de tiro em equipe que combina heróis únicos com habilidades especiais.</p>
+                <p class="description">Overwatch 2 é um jogo de tiro em equipe que continua a história e a jogabilidade do seu antecessor, oferecendo uma experiência dinâmica e cheia de ação em uma variedade de modos competitivos e cooperativos. Com novos mapas, modos de jogo e heróis, o título se foca no combate estratégico entre duas equipes de seis jogadores, cada uma escolhendo heróis com habilidades únicas e funções específicas, como dano, defesa ou suporte.
+                    O grande destaque de Overwatch 2 é a ênfase na narrativa e na construção do universo, com eventos de história que aprofundam a luta entre os heróis e as forças que ameaçam a paz global, como a organização criminosa Null Sector e outros antagonistas.</p>
                 <button class="read-more">Ler mais</button>
-                <div class="price">R$ 69,90</div>
-                <button>Comprar Agora</button>
+                <div class="price">R$ 69,00</div>
+                <a href="https://store.steampowered.com/app/2357570/Overwatch_2/"><button>Comprar Agora</button></a>
             </div>
             <div class="game">
                 <img src="img/Ghost_of_Tsushima_capa.jpg" alt="Ghost of Tsushima">
-                <h3>Ghost of Tsushima</h3>
-                <p class="description">Explore um Japão feudal deslumbrante enquanto você luta como o último samurai.</p>
+                <h3>Ghost of Tsushima VERSÃO DO DIRETOR</h3>
+                <p class="description">
+                    Ghost of Tsushima: Director's Cut é uma versão expandida e aprimorada do aclamado jogo de ação e aventura Ghost of Tsushima, que transporta os jogadores para o Japão feudal no século XIII, no contexto da invasão mongol à ilha de Tsushima. Nesta edição, os jogadores controlam Jin Sakai, um samurai que, após ver sua terra natal destruída e sua honra desonrada, adota a identidade de "Fantasma" para lutar contra os invasores, desafiando as tradições do bushido para proteger seu povo.</p>
                 <button class="read-more">Ler mais</button>
-                <div class="price">R$ 129,90</div>
-                <button>Comprar Agora</button>
+                <div class="price">R$ 249,90</div>
+                <a href="https://store.steampowered.com/app/2215430/Ghost_of_Tsushima_VERSO_DO_DIRETOR/"><button>Comprar Agora</button></a>
             </div>
             <div class="game">
                 <img src="img/Metal_Gear_Solid_V_capa.jpg" alt="Metal Gear Solid V: The Phantom Pain">
                 <h3>Metal Gear Solid V: The Phantom Pain</h3>
-                <p class="description">Uma experiência de ação furtiva com uma narrativa rica e mundo aberto para explorar.</p>
+                <p class="description">
+                    Metal Gear Solid V: The Phantom Pain é a culminação da épica saga de espionagem e ação criada por Hideo Kojima, uma experiência inovadora que combina liberdade de exploração, narrativa profunda e mecânicas de gameplay refinadas. Situado em 1984, o jogo segue Venom Snake, também conhecido como Big Boss, enquanto ele busca vingança contra aqueles que destruíram sua base e sua organização, a Diamond Dogs, após o ataque devastador em Ground Zeroes.
+                    A história se passa em um vasto mundo aberto, dividido entre áreas de conflito no Oriente Médio e na África, permitindo ao jogador explorar e completar missões de forma não linear. Venom Snake, com sua icônica prótese no braço e habilidades de comando, deve recrutar soldados, montar bases, infiltrar-se em territórios inimigos e travar batalhas intensas, ao mesmo tempo em que lida com os complexos dilemas morais e pessoais relacionados à guerra, lealdade e identidade.</p>
                 <button class="read-more">Ler mais</button>
-                <div class="price">R$ 99,90</div>
-                <button>Comprar Agora</button>
+                <div class="price">R$ 99,00</div>
+                <a href="https://store.steampowered.com/app/287700/METAL_GEAR_SOLID_V_THE_PHANTOM_PAIN/"><button>Comprar Agora</button></a>
             </div>
         </div>
     </div>
@@ -157,44 +413,50 @@
         <h2>Aventura</h2>
         <div class="game-grid">
             <div class="game">
-                <img src="img/Horizon_Zero_Dawn_capa.jpg" alt="Horizon Zero Dawn">
-                <h3>Horizon Zero Dawn</h3>
-                <p class="description">Mergulhe em um mundo pós-apocalíptico habitado por máquinas, com uma história envolvente.</p>
+                <img src="img/Horizon_Forbidden_West_capa.jpg" alt="Horizon Zero Dawn">
+                <h3>Horizon Forbidden West</h3>
+                <p class="description">Horizon Forbidden West é a sequência do aclamado Horizon Zero Dawn, um jogo de ação e aventura de mundo aberto que leva os jogadores a um futuro pós-apocalíptico, onde a Terra é dominada por máquinas gigantescas e selvagens. No papel da protagonista Aloy, uma caçadora e arqueóloga, o jogo expande ainda mais o vasto universo criado no primeiro título, levando os jogadores a explorar novas regiões, enfrentar ameaças ainda mais perigosas e desvendar mistérios que podem determinar o destino do mundo.
+                    Situado no Oeste Proibido — uma região inexplorada e cheia de segredos — o jogo leva Aloy a terras inóspitas, com paisagens exuberantes e diversificadas, que incluem vastos desertos, selvas densas, montanhas geladas e ruínas submersas. No decorrer de sua jornada, ela se depara com novas tribos, novos tipos de máquinas e uma força misteriosa que ameaça destruir o equilíbrio do mundo. Ao lado de aliados, como o corajoso Erend e a estrategista Varl, Aloy precisa enfrentar esses novos perigos e descobrir como salvar a Terra de um novo cataclismo.
+                    Horizon Forbidden West expande a jogabilidade de seu antecessor com novos recursos, como a habilidade de nadar, escaladas mais fluidas, e uma maior variedade de armas e equipamentos. O sistema de combate foi aprimorado, oferecendo maior profundidade e variedade de estratégias para enfrentar as máquinas e inimigos humanos, além de uma IA mais desafiadora.
+                    A história continua explorando os dilemas existenciais e ecológicos que marcaram o primeiro jogo, com temas sobre a relação da humanidade com a natureza, as consequências da tecnologia descontrolada e a luta pela sobrevivência. A trama ainda revela mais sobre o passado de Aloy, sua conexão com o Projeto Zero Dawn e os segredos por trás das máquinas que dominam o planeta.</p>
                 <button class="read-more">Ler mais</button>
-                <div class="price">R$ 99,90</div>
-                <button>Comprar Agora</button>
+                <div class="price">R$ 249,90</div>
+                <a href="https://store.steampowered.com/app/2420110/Horizon_Forbidden_West__Edio_Completa/"><button>Comprar Agora</button></a>
             </div>
             <div class="game">
-                <img src="img/Horizon_Zero_Dawn_capa.jpg" alt="Horizon Zero Dawn">
+                <img src="img/Horizon_Zero_Dawn_remastered_capa.jpg" alt="Horizon Zero Dawn">
                 <h3>Horizon Zero Dawn</h3>
-                <p class="description">Mergulhe em um mundo pós-apocalíptico habitado por máquinas, com uma história envolvente.</p>
+                <p class="description">
+                    Horizon Zero Dawn é um jogo de ação e aventura ambientado em um futuro pós-apocalíptico, onde a Terra foi dominada por máquinas gigantescas que imitam animais e criaturas mitológicas. O jogador assume o papel de Aloy, uma jovem caçadora e arqueóloga, que busca entender seu passado e desvendar os mistérios por trás do colapso da civilização humana.
+                    Com um mundo aberto repleto de beleza natural e desafios, Horizon Zero Dawn combina combate estratégico e furtivo, onde Aloy utiliza um arsenal de armas, armadilhas e habilidades para caçar as poderosas máquinas e explorar ruínas de antigas cidades. Ao longo de sua jornada, ela encontra diversas tribos humanas, cada uma com suas próprias crenças e culturas, e se envolve em uma trama que revela as razões para o apocalipse, a origem das máquinas e sua conexão com o Projeto Zero Dawn, uma iniciativa que visava salvar a Terra de um futuro cataclísmico.
+                    </p>
                 <button class="read-more">Ler mais</button>
-                <div class="price">R$ 99,90</div>
-                <button>Comprar Agora</button>
+                <div class="price">R$ 249,50</div>
+                <a href="https://store.steampowered.com/app/2561580/Horizon_Zero_Dawn_Remastered/"><button>Comprar Agora</button></a>
             </div>
             <div class="game">
                 <img src="img/No_Man's_Sky_capa.jpg" alt="No Man's Sky">
                 <h3>No Man's Sky</h3>
                 <p class="description">Explore um universo infinito gerado proceduralmente, cheio de planetas e vida alienígena.</p>
                 <button class="read-more">Ler mais</button>
-                <div class="price">R$ 99,90</div>
-                <button>Comprar Agora</button>
+                <div class="price">R$ 64,80</div>
+                <a href="https://store.steampowered.com/app/275850/No_Mans_Sky/"><button>Comprar Agora</button></a>
             </div>
             <div class="game">
                 <img src="img/Firewatch_capa.jpg" alt="Firewatch">
                 <h3>Firewatch</h3>
                 <p class="description">Uma experiência narrativa em primeira pessoa, explorando temas de solidão e conexão.</p>
                 <button class="read-more">Ler mais</button>
-                <div class="price">R$ 69,90</div>
-                <button>Comprar Agora</button>
+                <div class="price">R$ 59,99</div>
+                <a href="https://store.steampowered.com/app/383870/Firewatch/"><button>Comprar Agora</button></a>
             </div>
             <div class="game">
                 <img src="img/Untitled_Goose_Game_capa.jpg" alt="Untitled Goose Game">
                 <h3>Untitled Goose Game</h3>
                 <p class="description">Divirta-se como um ganso travesso em um jogo de quebra-cabeça e aventura.</p>
                 <button class="read-more">Ler mais</button>
-                <div class="price">R$ 59,90</div>
-                <button>Comprar Agora</button>
+                <div class="price">R$ 59,99</div>
+                <a href="https://store.steampowered.com/app/837470/Untitled_Goose_Game/"><button>Comprar Agora</button></a>
             </div>
             <!-- Segunda fileira -->
             <div class="game">
@@ -202,40 +464,40 @@
                 <h3>Outer Wilds</h3>
                 <p class="description">Uma experiência única de exploração espacial e descoberta, onde cada ciclo de tempo é importante.</p>
                 <button class="read-more">Ler mais</button>
-                <div class="price">R$ 89,90</div>
+                <div class="price">R$ 40,79</div>
                 <button>Comprar Agora</button>
             </div>
             <div class="game">
-                <img src="img/Horizon_Zero_Dawn_capa.jpg" alt="Horizon Zero Dawn">
-                <h3>Horizon Zero Dawn</h3>
+                <img src="img/Days_Gone_capa.jpg" alt="Horizon Zero Dawn">
+                <h3>Days Gone</h3>
                 <p class="description">Mergulhe em um mundo pós-apocalíptico habitado por máquinas, com uma história envolvente.</p>
                 <button class="read-more">Ler mais</button>
-                <div class="price">R$ 99,90</div>
-                <button>Comprar Agora</button>
+                <div class="price">R$ 49,97</div>
+                <a href="https://store.steampowered.com/app/1259420/Days_Gone/"><button>Comprar Agora</button></a>
             </div>
             <div class="game">
                 <img src="img/Spiritfarer_capa.jpg" alt="Spiritfarer">
-                <h3>Spiritfarer</h3>
+                <h3>Spiritfarer: Edição Farewell</h3>
                 <p class="description">Um jogo de gerenciamento e aventura sobre a vida e a morte, onde você guia almas para o além.</p>
                 <button class="read-more">Ler mais</button>
-                <div class="price">R$ 59,90</div>
-                <button>Comprar Agora</button>
+                <div class="price">R$ 88,99</div>
+                <a href="https://store.steampowered.com/app/972660/Spiritfarer_Edio_Farewell/"><button>Comprar Agora</button></a>
             </div>
             <div class="game">
                 <img src="img/Ratchet_and_Clank_Rift_Apart_capa.jpg" alt="Ratchet & Clank: Rift Apart">
                 <h3>Ratchet & Clank: Rift Apart</h3>
                 <p class="description">Ação e aventura em um mundo colorido com mecânicas de quebra de dimensões.</p>
                 <button class="read-more">Ler mais</button>
-                <div class="price">R$ 79,90</div>
-                <button>Comprar Agora</button>
+                <div class="price">R$ 249,90</div>
+                <a href="https://store.steampowered.com/app/1895880/Ratchet__Clank_Em_Uma_Outra_Dimenso/"><button>Comprar Agora</button></a>
             </div>
             <div class="game">
                 <img src="img/Gris_capa.jpg" alt="Gris">
                 <h3>Gris</h3>
                 <p class="description">Um jogo de plataforma visualmente impressionante com uma narrativa sobre superação e crescimento.</p>
                 <button class="read-more">Ler mais</button>
-                <div class="price">R$ 39,90</div>
-                <button>Comprar Agora</button>
+                <div class="price">R$ 46,99</div>
+                <a href="https://store.steampowered.com/app/683320/GRIS/"><button>Comprar Agora</button></a>
             </div>
             <!-- Terceira fileira -->
             <div class="game">
@@ -243,24 +505,24 @@
                 <h3>Celeste</h3>
                 <p class="description">Uma plataforma desafiadora que conta a história de uma jovem em sua jornada para escalar uma montanha.</p>
                 <button class="read-more">Ler mais</button>
-                <div class="price">R$ 49,90</div>
-                <button>Comprar Agora</button>
+                <div class="price">R$ 59,99</div>
+                <a href="https://store.steampowered.com/app/504230/Celeste/"><button>Comprar Agora</button></a>
             </div>
             <div class="game">
-                <img src="img/Horizon_Zero_Dawn_capa.jpg" alt="Horizon Zero Dawn">
-                <h3>Horizon Zero Dawn</h3>
+                <img src="img/Rise_of_the_Tomb_Raider_capa.jpg" alt="Horizon Zero Dawn">
+                <h3>Rise of the Tomb Raider</h3>
                 <p class="description">Mergulhe em um mundo pós-apocalíptico habitado por máquinas, com uma história envolvente.</p>
                 <button class="read-more">Ler mais</button>
-                <div class="price">R$ 99,90</div>
-                <button>Comprar Agora</button>
+                <div class="price">R$ 18,74</div>
+                <a href="https://store.steampowered.com/app/391220/Rise_of_the_Tomb_Raider/"><button>Comprar Agora</button></a>
             </div>
             <div class="game">
                 <img src="img/The_Outer_Worlds_capa.jpg" alt="The Outer Worlds">
                 <h3>The Outer Worlds</h3>
                 <p class="description">Um RPG de ação que combina humor e escolhas significativas em um universo de ficção científica.</p>
                 <button class="read-more">Ler mais</button>
-                <div class="price">R$ 99,90</div>
-                <button>Comprar Agora</button>
+                <div class="price">R$ 159,90</div>
+                <a href="https://store.steampowered.com/app/578650/The_Outer_Worlds/"><button>Comprar Agora</button></a>
             </div>
             <div class="game">
                 <img src="img/Assassin's_Creed_Odyssey_capa.jpg" alt="Assassin's Creed Odyssey">
@@ -272,11 +534,11 @@
             </div>
             <div class="game">
                 <img src="img/Control_capa.jpg" alt="Control">
-                <h3>Control</h3>
+                <h3>Control Ultimate Edition</h3>
                 <p class="description">Um jogo de ação e aventura em um mundo surreal, onde você explora uma agência secreta.</p>
                 <button class="read-more">Ler mais</button>
-                <div class="price">R$ 79,90</div>
-                <button>Comprar Agora</button>
+                <div class="price">R$ 129,00</div>
+                <a href="https://store.steampowered.com/app/870780/Control_Ultimate_Edition/"><button>Comprar Agora</button></a>
             </div>
         </div>
     </div>
@@ -290,40 +552,40 @@
                 <h3>The Witcher 3: Wild Hunt</h3>
                 <p class="description">Explore um mundo vasto cheio de segredos enquanto busca pela sua filha adotiva em uma narrativa rica.</p>
                 <button class="read-more">Ler mais</button>
-                <div class="price">R$ 159,90</div>
-                <button>Comprar Agora</button>
+                <div class="price">R$ 129,99</div>
+                <a href="https://store.steampowered.com/app/292030/The_Witcher_3_Wild_Hunt/"><button>Comprar Agora</button></a>
             </div>
             <div class="game">
-                <img src="img/The_Witcher_3_capa.jpg" alt="The Witcher 3: Wild Hunt">
-                <h3>The Witcher 3: Wild Hunt</h3>
+                <img src="img/Black_Myth_Wukong_capa.jpg" alt="The Witcher 3: Wild Hunt">
+                <h3>Black Myth: Wukong</h3>
                 <p class="description">Explore um mundo vasto cheio de segredos enquanto busca pela sua filha adotiva em uma narrativa rica.</p>
                 <button class="read-more">Ler mais</button>
-                <div class="price">R$ 159,90</div>
-                <button>Comprar Agora</button>
+                <div class="price">R$ 229,99</div>
+                <a href="https://store.steampowered.com/app/2358720/Black_Myth_Wukong/"><button>Comprar Agora</button></a>
             </div>
             <div class="game">
                 <img src="img/Elden_Ring_capa.jpg" alt="Elden Ring">
                 <h3>Elden Ring</h3>
                 <p class="description">Mergulhe em um mundo aberto e expansivo, onde a exploração e a luta são essenciais para sua sobrevivência.</p>
                 <button class="read-more">Ler mais</button>
-                <div class="price">R$ 99,90</div>
-                <button>Comprar Agora</button>
+                <div class="price">R$ 229,90</div>
+                <a href="https://store.steampowered.com/app/1245620/ELDEN_RING/"><button>Comprar Agora</button></a>
             </div>
             <div class="game">
                 <img src="img/Monster_Hunter_World_capa.jpg" alt="Monster Hunter: World">
                 <h3>Monster Hunter: World</h3>
                 <p class="description">Entre em um mundo vibrante e dinâmico, onde você pode caçar monstros gigantes e forjar armas poderosas.</p>
                 <button class="read-more">Ler mais</button>
-                <div class="price">R$ 89,90</div>
-                <button>Comprar Agora</button>
+                <div class="price">R$ 279,00</div>
+                <a href="https://store.steampowered.com/app/2246340/Monster_Hunter_Wilds/"><button>Comprar Agora</button></a>
             </div>
             <div class="game">
-                <img src="img/World_of_Warcraft_capa.jpg" alt="World of Warcraft">
+                <img src="img/palworld_capa.jpg" alt="World of Warcraft">
                 <h3>World of Warcraft</h3>
                 <p class="description">Um dos MMORPGs mais populares, onde você pode explorar um vasto mundo, completar missões e interagir com outros jogadores.</p>
                 <button class="read-more">Ler mais</button>
-                <div class="price">R$ 69,90</div>
-                <button>Comprar Agora</button>
+                <div class="price">R$ 66,74</div>
+                <a href="https://store.steampowered.com/app/1623730/Palworld/"><button>Comprar Agora</button></a>
             </div>
             <!-- Segunda fileira -->
             <div class="game">
@@ -331,81 +593,81 @@
                 <h3>Dragon Age: Inquisition</h3>
                 <p class="description">Lidere uma equipe de heróis em uma batalha épica contra forças malignas e descubra segredos do seu mundo.</p>
                 <button class="read-more">Ler mais</button>
-                <div class="price">R$ 89,90</div>
-                <button>Comprar Agora</button>
+                <div class="price">R$  209,00</div>
+                <a href="https://store.steampowered.com/app/1222690/Dragon_Age_Inquisition/"><button>Comprar Agora</button></a>
             </div>
             <div class="game">
-                <img src="img/The_Witcher_3_capa.jpg" alt="The Witcher 3: Wild Hunt">
-                <h3>The Witcher 3: Wild Hunt</h3>
+                <img src="img/The_Elder_Scrolls_capa.jpg" alt="The Witcher 3: Wild Hunt">
+                <h3>The Elder Scrolls</h3>
                 <p class="description">Explore um mundo vasto cheio de segredos enquanto busca pela sua filha adotiva em uma narrativa rica.</p>
                 <button class="read-more">Ler mais</button>
-                <div class="price">R$ 159,90</div>
-                <button>Comprar Agora</button>
+                <div class="price">R$ 61,50</div>
+                <a href="https://store.steampowered.com/app/306130/The_Elder_Scrolls_Online/"><button>Comprar Agora</button></a>
             </div>
             <div class="game">
                 <img src="img/Final_Fantasy_VII_Remake_capa.jpg" alt="Final Fantasy VII Remake">
-                <h3>Final Fantasy VII Remake</h3>
+                <h3>FINAL FANTASY VII REMAKE INTERGRADE</h3>
                 <p class="description">Reviva uma das maiores histórias de RPG com gráficos e jogabilidade renovados.</p>
                 <button class="read-more">Ler mais</button>
-                <div class="price">R$ 129,90</div>
-                <button>Comprar Agora</button>
+                <div class="price">R$ 349,90</div>
+                <a href="https://store.steampowered.com/app/1462040/FINAL_FANTASY_VII_REMAKE_INTERGRADE/"><button>Comprar Agora</button></a>
             </div>
             <div class="game">
                 <img src="img/Persona_5_capa.jpg" alt="Persona 5">
-                <h3>Persona 5</h3>
+                <h3>Persona 5 Royal</h3>
                 <p class="description">Experimente a vida de um estudante e um ladrão de almas enquanto explora o mundo dos sonhos.</p>
                 <button class="read-more">Ler mais</button>
-                <div class="price">R$ 89,90</div>
-                <button>Comprar Agora</button>
+                <div class="price">R$ 249,90</div>
+                <a href="https://store.steampowered.com/app/1687950/Persona_5_Royal/"><button>Comprar Agora</button></a>
             </div>
             <div class="game">
                 <img src="img/Sekiro_Shadows_Die_Twice_capa.jpg" alt="Sekiro: Shadows Die Twice">
-                <h3>Sekiro: Shadows Die Twice</h3>
+                <h3>Sekiro™: Shadows Die Twice - GOTY Edition</h3>
                 <p class="description">Um jogo desafiador que combina furtividade, combate e exploração em um Japão feudal devastado.</p>
                 <button class="read-more">Ler mais</button>
-                <div class="price">R$ 89,90</div>
-                <button>Comprar Agora</button>
+                <div class="price">R$ 274,00</div>
+                <a href="https://store.steampowered.com/app/814380/Sekiro_Shadows_Die_Twice__GOTY_Edition/"><button>Comprar Agora</button></a>
             </div>
             <!-- Terceira fileira -->
             <div class="game">
                 <img src="img/Divinity_Original_Sin_2_capa.jpg" alt="Divinity: Original Sin 2">
-                <h3>Divinity: Original Sin 2</h3>
+                <h3>Divinity: Original Sin 2 - Definitive Edition</h3>
                 <p class="description">Um RPG de estratégia com uma narrativa rica e combate tático profundo.</p>
                 <button class="read-more">Ler mais</button>
-                <div class="price">R$ 89,90</div>
-                <button>Comprar Agora</button>
+                <div class="price">R$ 90,99</div>
+                <a href="https://store.steampowered.com/app/435150/Divinity_Original_Sin_2__Definitive_Edition/"><button>Comprar Agora</button></a>
             </div>
             <div class="game">
-                <img src="img/The_Witcher_3_capa.jpg" alt="The Witcher 3: Wild Hunt">
-                <h3>The Witcher 3: Wild Hunt</h3>
+                <img src="img/Diablo_IV_capa.jpg" alt="The Witcher 3: Wild Hunt">
+                <h3>Diablo IV</h3>
                 <p class="description">Explore um mundo vasto cheio de segredos enquanto busca pela sua filha adotiva em uma narrativa rica.</p>
                 <button class="read-more">Ler mais</button>
-                <div class="price">R$ 159,90</div>
-                <button>Comprar Agora</button>
+                <div class="price">R$ 229,90</div>
+                <a href="https://store.steampowered.com/app/2344520/Diablo_IV/"><button>Comprar Agora</button></a>
             </div>
             <div class="game">
                 <img src="img/Baldurs_Gate_3_capa.jpg" alt="Baldur's Gate 3">
                 <h3>Baldur's Gate 3</h3>
                 <p class="description">Um retorno à famosa série de RPG, onde suas escolhas moldam a história e o mundo ao seu redor.</p>
                 <button class="read-more">Ler mais</button>
-                <div class="price">R$ 139,90</div>
-                <button>Comprar Agora</button>
+                <div class="price">R$ 199,99</div>
+                <a href="https://store.steampowered.com/app/1086940/Baldurs_Gate_3/"><button>Comprar Agora</button></a>
             </div>
             <div class="game">
                 <img src="img/Monster_Hunter_Rise_capa.jpg" alt="Monster Hunter Rise">
                 <h3>Monster Hunter Rise</h3>
                 <p class="description">Uma nova aventura na série, com novos monstros e mecânicas de jogo.</p>
                 <button class="read-more">Ler mais</button>
-                <div class="price">R$ 89,90</div>
-                <button>Comprar Agora</button>
+                <div class="price">R$ 139,00</div>
+                <a href="https://store.steampowered.com/app/1446780/MONSTER_HUNTER_RISE/"><button>Comprar Agora</button></a>
             </div>
-            <div class="game">
+            <div class="game">Octopath_Traveler_capa
                 <img src="img/Octopath_Traveler_capa.jpg" alt="Octopath Traveler">
                 <h3>Octopath Traveler</h3>
                 <p class="description">Um RPG clássico com um estilo visual único e uma narrativa envolvente.</p>
                 <button class="read-more">Ler mais</button>
-                <div class="price">R$ 79,90</div>
-                <button>Comprar Agora</button>
+                <div class="price">R$ 226,99</div>
+                <a href="https://store.steampowered.com/app/921570/OCTOPATH_TRAVELER/"><button>Comprar Agora</button></a>
             </div>
         </div>
     </div>
@@ -415,85 +677,85 @@
         <h2>Simulação</h2>
         <div class="game-grid">
             <div class="game">
-                <img src="img/The_Sims_4_capa.jpg" alt="The Sims 4">
-                <h3>The Sims 4</h3>
-                <p class="description">Crie e controle pessoas em um mundo aberto onde tudo é possível.</p>
-                <button class="read-more">Ler mais</button>
-                <div class="price">R$ 89,90</div>
-                <button>Comprar Agora</button>
-            </div>
+                <img src="img/The_Sims_3_capa.jpg" alt="The Sims 3">
+                    <h3>The Sims 3</h3>
+                    <p class="description">Crie e controle pessoas em um mundo aberto onde tudo é possível.</p>
+                    <button class="read-more">Ler mais</button>
+                    <div class="price">R$ 79,00</div>
+                    <a href="https://store.steampowered.com/app/47890/The_Sims_3/"><button>Comprar Agora</button></a>
+                </div>
             <div class="game">
-            <img src="img/The_Sims_4_capa.jpg" alt="The Sims 4">
-                <h3>The Sims 4</h3>
+            <img src="img/EA_SPORTS_FC_25_capa.jpg" alt="The Sims 3">
+                <h3>EA SPORTS FC 25</h3>
                 <p class="description">Crie e controle pessoas em um mundo aberto onde tudo é possível.</p>
                 <button class="read-more">Ler mais</button>
-                <div class="price">R$ 89,90</div>
-                <button>Comprar Agora</button>
+                <div class="price">R$ 299,00</div>
+                <a href="https://store.steampowered.com/app/2669320/EA_SPORTS_FC_25/"><button>Comprar Agora</button></a>
             </div>
             <div class="game">
                 <img src="img/Cities_Skylines_capa.jpg" alt="Cities: Skylines">
                 <h3>Cities: Skylines</h3>
                 <p class="description">Construa e gerencie sua própria cidade em um jogo de simulação desafiador.</p>
                 <button class="read-more">Ler mais</button>
-                <div class="price">R$ 79,90</div>
-                <button>Comprar Agora</button>
+                <div class="price">R$ 107,99</div>
+                <a href="https://store.steampowered.com/app/255710/Cities_Skylines/"><button>Comprar Agora</button></a>
             </div>
             <div class="game">
-                <img src="img/Planet_Coaster_capa.jpg" alt="Planet Coaster">
-                <h3>Planet Coaster</h3>
+                <img src="img/Planet_Coaster_2_capa.jpg" alt="Planet Coaster">
+                <h3>Planet Coaster 2</h3>
                 <p class="description">Crie e gerencie seu próprio parque de diversões com montanhas-russas emocionantes.</p>
                 <button class="read-more">Ler mais</button>
-                <div class="price">R$ 89,90</div>
-                <button>Comprar Agora</button>
+                <div class="price">R$ 134,99</div>
+                <a href="https://store.steampowered.com/app/2688950/Planet_Coaster_2/"><button>Comprar Agora</button></a>
             </div>
             <div class="game">
-                <img src="img/Flight_Simulator_2020_capa.jpg" alt="Microsoft Flight Simulator">
-                <h3>Microsoft Flight Simulator</h3>
+                <img src="img/Flight_Simulator_2024_capa.jpg" alt="Microsoft Flight Simulator">
+                <h3>Microsoft Flight Simulator 2024</h3>
                 <p class="description">Experimente voar como nunca antes, com gráficos impressionantes e um mundo realista.</p>
                 <button class="read-more">Ler mais</button>
-                <div class="price">R$ 249,90</div>
-                <button>Comprar Agora</button>
+                <div class="price">R$ 299,99</div>
+                <a href="https://store.steampowered.com/app/2537590/Microsoft_Flight_Simulator_2024/"><button>Comprar Agora</button></a>
             </div>
             <!-- Segunda fileira -->
             <div class="game">
-                <img src="img/Animal_Crossing_New_Horizons_capa.jpg" alt="Animal Crossing: New Horizons">
-                <h3>Animal Crossing: New Horizons</h3>
+                <img src="img/Planet_Zoo_capa.jpg" alt="Animal Crossing: New Horizons">
+                <h3>Planet Zoo</h3>
                 <p class="description">Crie sua própria ilha dos sonhos enquanto interage com adoráveis animais antropomórficos.</p>
                 <button class="read-more">Ler mais</button>
-                <div class="price">R$ 299,90</div>
-                <button>Comprar Agora</button>
+                <div class="price">R$ 100,00</div>
+                <a href="https://store.steampowered.com/app/703080/Planet_Zoo/"><button>Comprar Agora</button></a>
             </div>
             <div class="game">
-                <img src="img/Animal_Crossing_New_Horizons_capa.jpg" alt="Animal Crossing: New Horizons">
-                <h3>Animal Crossing: New Horizons</h3>
+                <img src="img/NBA_2K25_capa.jpg" alt="Animal Crossing: New Horizons">
+                <h3>NBA 2K25</h3>
                 <p class="description">Crie sua própria ilha dos sonhos enquanto interage com adoráveis animais antropomórficos.</p>
                 <button class="read-more">Ler mais</button>
-                <div class="price">R$ 299,90</div>
-                <button>Comprar Agora</button>
+                <div class="price">R$ 139,96</div>
+                <a href="https://store.steampowered.com/app/2878980/NBA_2K25/"><button>Comprar Agora</button></a>
             </div>
             <div class="game">
                 <img src="img/Stardew_Valley_capa.jpg" alt="Stardew Valley">
                 <h3>Stardew Valley</h3>
                 <p class="description">Viva a vida no campo, cultive sua fazenda e faça amigos na aldeia.</p>
                 <button class="read-more">Ler mais</button>
-                <div class="price">R$ 49,90</div>
-                <button>Comprar Agora</button>
+                <div class="price">R$ 24,99</div>
+                <a href="https://store.steampowered.com/app/413150/Stardew_Valley/"><button>Comprar Agora</button></a>
             </div>
             <div class="game">
                 <img src="img/Factorio_capa.jpg" alt="Factorio">
                 <h3>Factorio</h3>
                 <p class="description">Construa e otimize fábricas enquanto luta contra alienígenas em um mundo alienígena.</p>
                 <button class="read-more">Ler mais</button>
-                <div class="price">R$ 69,90</div>
-                <button>Comprar Agora</button>
+                <div class="price">R$ 101,99</div>
+                <a href="https://store.steampowered.com/app/427520/Factorio/"><button>Comprar Agora</button></a>
             </div>
             <div class="game">
                 <img src="img/Prison_Architect_capa.jpg" alt="Prison Architect">
                 <h3>Prison Architect</h3>
                 <p class="description">Construa e gerencie sua própria prisão, lidando com os desafios diários.</p>
                 <button class="read-more">Ler mais</button>
-                <div class="price">R$ 79,90</div>
-                <button>Comprar Agora</button>
+                <div class="price">R$ 107,99</div>
+                <a href="https://store.steampowered.com/app/233450/Prison_Architect/"><button>Comprar Agora</button></a>
             </div>
             <!-- Terceira fileira -->
             <div class="game">
@@ -501,40 +763,40 @@
                 <h3>House Flipper</h3>
                 <p class="description">Compre, reforme e venda casas para criar o lar dos seus sonhos.</p>
                 <button class="read-more">Ler mais</button>
-                <div class="price">R$ 69,90</div>
-                <button>Comprar Agora</button>
+                <div class="price">R$ 7,39</div>
+                <a href="https://store.steampowered.com/app/613100/House_Flipper/"><button>Comprar Agora</button></a>
             </div>
             <div class="game">
-                <img src="img/Animal_Crossing_New_Horizons_capa.jpg" alt="Animal Crossing: New Horizons">
-                <h3>Animal Crossing: New Horizons</h3>
+                <img src="img/Farming_Simulator_25_capa.jpg" alt="Animal Crossing: New Horizons">
+                <h3>Farming Simulator 25</h3>
                 <p class="description">Crie sua própria ilha dos sonhos enquanto interage com adoráveis animais antropomórficos.</p>
                 <button class="read-more">Ler mais</button>
-                <div class="price">R$ 299,90</div>
-                <button>Comprar Agora</button>
+                <div class="price">R$ 194,99</div>
+                <a href="https://store.steampowered.com/app/2300320/Farming_Simulator_25/"><button>Comprar Agora</button></a>
             </div>
             <div class="game">
                 <img src="img/Two_Point_Hospital_capa.jpg" alt="Two Point Hospital">
                 <h3>Two Point Hospital</h3>
                 <p class="description">Construa e gerencie um hospital, tratando doenças peculiares com humor.</p>
                 <button class="read-more">Ler mais</button>
-                <div class="price">R$ 69,90</div>
-                <button>Comprar Agora</button>
+                <div class="price">R$ 155,00</div>
+                <a href="https://store.steampowered.com/app/535930/Two_Point_Hospital/"><button>Comprar Agora</button></a>
             </div>
             <div class="game">
-                <img src="img/Planet_Fallout_capa.jpg" alt="Fallout Shelter">
-                <h3>Fallout Shelter</h3>
+                <img src="img/starfield_capa.jpg" alt="Fallout Shelter">
+                <h3>Starfield</h3>
                 <p class="description">Construa e gerencie um abrigo nuclear, cuidando de seus moradores.</p>
                 <button class="read-more">Ler mais</button>
-                <div class="price">R$ 49,90</div>
-                <button>Comprar Agora</button>
+                <div class="price">R$ 299,00</div>
+                <a href="https://store.steampowered.com/app/1716740/Starfield/"><button>Comprar Agora</button></a>
             </div>
             <div class="game">
-                <img src="img/SimCity_2013_capa.jpg" alt="SimCity">
-                <h3>SimCity</h3>
+                <img src="img/SimCity_3000_capa.jpg" alt="SimCity">
+                <h3>SimCity 3000 Unlimited</h3>
                 <p class="description">Crie e gerencie sua própria cidade, enfrentando desafios urbanos e econômicos.</p>
                 <button class="read-more">Ler mais</button>
-                <div class="price">R$ 99,90</div>
-                <button>Comprar Agora</button>
+                <div class="price">R$ 24,00</div>
+                <a href="https://store.steampowered.com/app/2741560/SimCity_3000_Unlimited/"><button>Comprar Agora</button></a>
             </div>
         </div>
     </div>
@@ -544,61 +806,62 @@
         <h2>Aventura</h2>
         <div class="game-grid">
             <div class="game">
-                <img src="img/The_Legend_of_Zelda_Breath_of_the_Wild_capa.jpg" alt="The Legend of Zelda: Breath of the Wild">
-                <h3>The Legend of Zelda: Breath of the Wild</h3>
+                <img src="img/Path_of_Exile_2_capa.jpg" alt="The Legend of Zelda: Breath of the Wild">
+                <h3>Path of Exile 2</h3>
                 <p class="description">Explore um vasto mundo aberto enquanto enfrenta inimigos e resolve quebra-cabeças.</p>
                 <button class="read-more">Ler mais</button>
-                <div class="price">R$ 299,90</div>
-                <button>Comprar Agora</button>
+                <div class="price">R$ 79,80</div>
+                <a href="https://store.steampowered.com/app/2694490/Path_of_Exile_2/"><button>Comprar Agora</button></a>
             </div>
             <div class="game">
-                <img src="img/The_Legend_of_Zelda_Breath_of_the_Wild_capa.jpg" alt="The Legend of Zelda: Breath of the Wild">
-                <h3>The Legend of Zelda: Breath of the Wild</h3>
+                <img src="img/THRONE_AND_LIBERTY_capa.jpg" alt="The Legend of Zelda: Breath of the Wild">
+                <h3>THRONE AND LIBERTY - Celebration Pack: Ouro
+                </h3>
                 <p class="description">Explore um vasto mundo aberto enquanto enfrenta inimigos e resolve quebra-cabeças.</p>
                 <button class="read-more">Ler mais</button>
-                <div class="price">R$ 299,90</div>
-                <button>Comprar Agora</button>
+                <div class="price">R$ 499,99</div>
+                <a href="https://store.steampowered.com/app/3138340/THRONE_AND_LIBERTY__Celebration_Pack_Ouro/"><button>Comprar Agora</button></a>
             </div>
             <div class="game">
-                <img src="img/Red_Dead_Redemption_2_capa.jpg" alt="Red Dead Redemption 2">
+                <img src="img/red_dead.jpg" alt="Red Dead Redemption 2">
                 <h3>Red Dead Redemption 2</h3>
                 <p class="description">Uma narrativa épica ambientada no Velho Oeste, onde você se junta a uma gangue de fora da lei.</p>
                 <button class="read-more">Ler mais</button>
-                <div class="price">R$ 199,90</div>
-                <button>Comprar Agora</button>
+                <div class="price">R$ 98,96</div>
+                <a href="https://store.steampowered.com/app/1174180/Red_Dead_Redemption_2/"><button>Comprar Agora</button></a>
             </div>
             <div class="game">
-                <img src="img/Assassin's_Creed_Valhalla_capa.jpg" alt="Assassin's Creed Valhalla">
-                <h3>Assassin's Creed Valhalla</h3>
+                <img src="img/Dead_Cells_capa.jpg" alt="Assassin's Creed Valhalla">
+                <h3>Dead Cells</h3>
                 <p class="description">Viva como um vikingo em uma narrativa rica em ação, aventura e exploração.</p>
                 <button class="read-more">Ler mais</button>
-                <div class="price">R$ 199,90</div>
-                <button>Comprar Agora</button>
+                <div class="price">R$ 23,74</div>
+                <a href="https://store.steampowered.com/app/588650/Dead_Cells/"><button>Comprar Agora</button></a>
             </div>
             <div class="game">
-                <img src="img/Ghost_of_Tsushima_capa.jpg" alt="Ghost of Tsushima">
-                <h3>Ghost of Tsushima</h3>
+                <img src="img/Stray_capa.jpg" alt="Ghost of Tsushima">
+                <h3>Stray</h3>
                 <p class="description">Experimente o Japão feudal como um samurai em busca de libertar sua ilha de invasores.</p>
                 <button class="read-more">Ler mais</button>
-                <div class="price">R$ 159,90</div>
-                <button>Comprar Agora</button>
+                <div class="price">R$ 47,99</div>
+                <a href="https://store.steampowered.com/app/1332010/Stray/"><button>Comprar Agora</button></a>
             </div>
             <!-- Segunda fileira -->
             <div class="game">
                 <img src="img/Spider-Man_Miles_Morales_capa.jpg" alt="Spider-Man: Miles Morales">
-                <h3>Spider-Man: Miles Morales</h3>
+                <h3>Marvel’s Spider-Man: Miles Morales</h3>
                 <p class="description">Acompanhe Miles em sua jornada como o novo Homem-Aranha em Nova York.</p>
                 <button class="read-more">Ler mais</button>
-                <div class="price">R$ 179,90</div>
-                <button>Comprar Agora</button>
+                <div class="price">R$ 199,90</div>
+                <a href="https://store.steampowered.com/app/1817190/Marvels_SpiderMan_Miles_Morales/"><button>Comprar Agora</button></a>
             </div>
             <div class="game">
-                <img src="img/The_Legend_of_Zelda_Breath_of_the_Wild_capa.jpg" alt="The Legend of Zelda: Breath of the Wild">
-                <h3>The Legend of Zelda: Breath of the Wild</h3>
+                <img src="img/New_World_Aeternum_capa.jpg" alt="The Legend of Zelda: Breath of the Wild">
+                <h3>New World: Aeternum</h3>
                 <p class="description">Explore um vasto mundo aberto enquanto enfrenta inimigos e resolve quebra-cabeças.</p>
                 <button class="read-more">Ler mais</button>
-                <div class="price">R$ 299,90</div>
-                <button>Comprar Agora</button>
+                <div class="price">R$ 327,89</div>
+                <a href="https://store.steampowered.com/app/1063730/New_World_Aeternum/"><button>Comprar Agora</button></a>
             </div>
             <div class="game">
                 <img src="img/Control_capa.jpg" alt="Control">
@@ -613,8 +876,8 @@
                 <h3>Batman: Arkham Knight</h3>
                 <p class="description">Junte-se ao Cavaleiro das Trevas em sua luta contra o crime em Gotham.</p>
                 <button class="read-more">Ler mais</button>
-                <div class="price">R$ 79,90</div>
-                <button>Comprar Agora</button>
+                <div class="price">R$ 89,99</div>
+                <a href="https://store.steampowered.com/app/208650/Batman_Arkham_Knight/"><button>Comprar Agora</button></a>
             </div>
             <div class="game">
                 <img src="img/Detroit_Become_Human_capa.jpg" alt="Detroit: Become Human">
@@ -622,7 +885,7 @@
                 <p class="description">Uma narrativa interativa que explora a vida de androides em um futuro próximo.</p>
                 <button class="read-more">Ler mais</button>
                 <div class="price">R$ 99,90</div>
-                <button>Comprar Agora</button>
+                <a href="https://store.steampowered.com/app/1222140/Detroit_Become_Human/"><button>Comprar Agora</button></a>
             </div>
             <!-- Terceira fileira -->
             <div class="game">
@@ -630,40 +893,40 @@
                 <h3>Death Stranding</h3>
                 <p class="description">Uma experiência única que combina aventura e narrativa em um mundo pós-apocalíptico.</p>
                 <button class="read-more">Ler mais</button>
-                <div class="price">R$ 99,90</div>
-                <button>Comprar Agora</button>
+                <div class="price">R$ 159,00</div>
+                <a href="https://store.steampowered.com/app/1850570/DEATH_STRANDING_DIRECTORS_CUT/"><button>Comprar Agora</button></a>
             </div>
             <div class="game">
-                <img src="img/The_Legend_of_Zelda_Breath_of_the_Wild_capa.jpg" alt="The Legend of Zelda: Breath of the Wild">
-                <h3>The Legend of Zelda: Breath of the Wild</h3>
+                <img src="img/SnowRunner_capa.jpg" alt="The Legend of Zelda: Breath of the Wild">
+                <h3>SnowRunner</h3>
                 <p class="description">Explore um vasto mundo aberto enquanto enfrenta inimigos e resolve quebra-cabeças.</p>
                 <button class="read-more">Ler mais</button>
-                <div class="price">R$ 299,90</div>
-                <button>Comprar Agora</button>
+                <div class="price">R$ 49,95</div>
+                <a href="https://store.steampowered.com/app/1465360/SnowRunner/"><button>Comprar Agora</button></a>
             </div>
             <div class="game">
                 <img src="img/Sekiro_Shadows_Die_Twice_capa.jpg" alt="Sekiro: Shadows Die Twice">
                 <h3>Sekiro: Shadows Die Twice</h3>
                 <p class="description">Um jogo desafiador que combina furtividade, combate e exploração em um Japão feudal devastado.</p>
                 <button class="read-more">Ler mais</button>
-                <div class="price">R$ 89,90</div>
-                <button>Comprar Agora</button>
+                <div class="price">R$ 274,00</div>
+                <a href="https://store.steampowered.com/app/814380/Sekiro_Shadows_Die_Twice__GOTY_Edition/"><button>Comprar Agora</button></a>
             </div>
             <div class="game">
                 <img src="img/God_of_War_capa.jpg" alt="God of War">
-                <h3>God of War</h3>
+                <h3>God of War Ragnarök</h3>
                 <p class="description">Uma reimaginação da clássica saga, onde Kratos deve enfrentar deuses e mitos nórdicos.</p>
                 <button class="read-more">Ler mais</button>
-                <div class="price">R$ 159,90</div>
-                <button>Comprar Agora</button>
+                <div class="price">R$ 249,90</div>
+                <a href="https://store.steampowered.com/app/2322010/God_of_War_Ragnark/"><button>Comprar Agora</button></a>
             </div>
             <div class="game">
                 <img src="img/Final_Fantasy_XV_capa.jpg" alt="Final Fantasy XV">
-                <h3>Final Fantasy XV</h3>
+                <h3>FINAL FANTASY XV WINDOWS EDITION</h3>
                 <p class="description">Acompanhe a jornada de Noctis e seus amigos em um mundo de fantasia cheio de aventuras.</p>
                 <button class="read-more">Ler mais</button>
-                <div class="price">R$ 99,90</div>
-                <button>Comprar Agora</button>
+                <div class="price">R$ 125,00</div>
+                <a href="https://store.steampowered.com/app/637650/FINAL_FANTASY_XV_WINDOWS_EDITION/"><button>Comprar Agora</button></a>
             </div>
         </div>
     </div>
@@ -677,98 +940,98 @@
                 <h3>Sid Meier's Civilization VI</h3>
                 <p class="description">Construa um império que resista ao teste do tempo, desde a Idade da Pedra até o futuro.</p>
                 <button class="read-more">Ler mais</button>
-                <div class="price">R$ 199,90</div>
-                <button>Comprar Agora</button>
+                <div class="price">R$ 6,45</div>
+                <a href="https://store.steampowered.com/app/289070/Sid_Meiers_Civilization_VI/"><button>Comprar Agora</button></a>
             </div>
             <div class="game">
-                <img src="img/Civilization_VI_capa.jpg" alt="Sid Meier's Civilization VI">
-                <h3>Sid Meier's Civilization VI</h3>
+                <img src="img/RimWorld_capa.jpg" alt="Sid Meier's Civilization VI">
+                <h3>RimWorld</h3>
                 <p class="description">Construa um império que resista ao teste do tempo, desde a Idade da Pedra até o futuro.</p>
                 <button class="read-more">Ler mais</button>
-                <div class="price">R$ 199,90</div>
-                <button>Comprar Agora</button>
+                <div class="price">R$ 79,99</div>
+                <a href="https://store.steampowered.com/app/294100/RimWorld/"><button>Comprar Agora</button></a>
             </div>
             <div class="game">
-                <img src="img/Starcraft_II_capa.jpg" alt="StarCraft II">
-                <h3>StarCraft II</h3>
+                <img src="img/Civilization_VII_capa.jpg" alt="StarCraft II">
+                <h3>Sid Meier's Civilization VII</h3>
                 <p class="description">Lidere suas tropas em batalhas épicas em um universo de ficção científica.</p>
                 <button class="read-more">Ler mais</button>
-                <div class="price">R$ 89,90</div>
-                <button>Comprar Agora</button>
+                <div class="price">R$ 349,90</div>
+                <a href="https://store.steampowered.com/app/1295660/Sid_Meiers_Civilization_VII/"><button>Comprar Agora</button></a>
             </div>
             <div class="game">
                 <img src="img/Total_War_Three_Kingdoms_capa.jpg" alt="Total War: Three Kingdoms">
-                <h3>Total War: Three Kingdoms</h3>
+                <h3>Medieval II: Total War Kingdoms</h3>
                 <p class="description">Experimente a guerra e a diplomacia na China antiga em um jogo de estratégia profundo.</p>
                 <button class="read-more">Ler mais</button>
-                <div class="price">R$ 159,90</div>
-                <button>Comprar Agora</button>
+                <div class="price">R$ 84,99</div>
+                <a href="https://store.steampowered.com/app/4780/Medieval_II_Total_War_Kingdoms/"><button>Comprar Agora</button></a>
             </div>
             <div class="game">
                 <img src="img/XCOM_2_capa.jpg" alt="XCOM 2">
                 <h3>XCOM 2</h3>
                 <p class="description">Lute contra uma invasão alienígena em um jogo de estratégia por turnos desafiador.</p>
                 <button class="read-more">Ler mais</button>
-                <div class="price">R$ 89,90</div>
-                <button>Comprar Agora</button>
+                <div class="price">R$ 99,90</div>
+                <a href="https://store.steampowered.com/app/268500/XCOM_2/"><button>Comprar Agora</button></a>
             </div>
             <!-- Segunda fileira -->
             <div class="game">
-                <img src="img/Warcraft_III_Reforged_capa.jpg" alt="Warcraft III: Reforged">
-                <h3>Warcraft III: Reforged</h3>
+                <img src="img/stellaris_capa.jpg" alt="Warcraft III: Reforged">
+                <h3>Stellaris</h3>
                 <p class="description">Reviva um clássico da estratégia em tempo real com gráficos atualizados e novas mecânicas.</p>
                 <button class="read-more">Ler mais</button>
                 <div class="price">R$ 89,90</div>
-                <button>Comprar Agora</button>
+                <a href="https://store.steampowered.com/app/281990/Stellaris/"><button>Comprar Agora</button></a>
             </div>
             <div class="game">
-                <img src="img/Civilization_VI_capa.jpg" alt="Sid Meier's Civilization VI">
-                <h3>Sid Meier's Civilization VI</h3>
+                <img src="img/Hearts_of_Iron_IV.jpg" alt="Sid Meier's Civilization VI">
+                <h3>Hearts of Iron IV</h3>
                 <p class="description">Construa um império que resista ao teste do tempo, desde a Idade da Pedra até o futuro.</p>
                 <button class="read-more">Ler mais</button>
-                <div class="price">R$ 199,90</div>
-                <button>Comprar Agora</button>
+                <div class="price">R$ 179,99</div>
+                <a href="https://store.steampowered.com/app/394360/Hearts_of_Iron_IV/"><button>Comprar Agora</button></a>
             </div>
             <div class="game">
                 <img src="img/Crusader_Kings_III_capa.jpg" alt="Crusader Kings III">
                 <h3>Crusader Kings III</h3>
                 <p class="description">Construa sua dinastia e governe seu reino em um mundo medieval complexo.</p>
                 <button class="read-more">Ler mais</button>
-                <div class="price">R$ 199,90</div>
-                <button>Comprar Agora</button>
+                <div class="price">R$ 179,99</div>
+                <a href="https://store.steampowered.com/app/1158310/Crusader_Kings_III/"><button>Comprar Agora</button></a>
             </div>
             <div class="game">
                 <img src="img/Anno_1800_capa.jpg" alt="Anno 1800">
                 <h3>Anno 1800</h3>
                 <p class="description">Construa e gerencie cidades na era industrial em um jogo de estratégia complexo.</p>
                 <button class="read-more">Ler mais</button>
-                <div class="price">R$ 199,90</div>
-                <button>Comprar Agora</button>
+                <div class="price">R$ 44,99</div>
+                <a href="https://store.steampowered.com/app/916440/Anno_1800/"><button>Comprar Agora</button></a>
             </div>
             <div class="game">
                 <img src="img/Company_of_Heroes_3_capa.jpg" alt="Company of Heroes 3">
                 <h3>Company of Heroes 3</h3>
                 <p class="description">Um jogo de estratégia em tempo real ambientado na Segunda Guerra Mundial, com novas mecânicas.</p>
                 <button class="read-more">Ler mais</button>
-                <div class="price">R$ 159,90</div>
-                <button>Comprar Agora</button>
+                <div class="price">R$ 79,99</div>
+                <a href="https://store.steampowered.com/app/1677280/Company_of_Heroes_3/"><button>Comprar Agora</button></a>
             </div>
             <!-- Terceira fileira -->
             <div class="game">
                 <img src="img/Warhammer_40K_Chaos_Gate_capa.jpg" alt="Warhammer 40,000: Chaos Gate">
-                <h3>Warhammer 40,000: Chaos Gate</h3>
+                <h3>Warhammer 40,000: Space Marine 2</h3>
                 <p class="description">Uma estratégia por turnos ambientada no universo Warhammer 40k, onde você combate forças do Caos.</p>
                 <button class="read-more">Ler mais</button>
                 <div class="price">R$ 89,90</div>
-                <button>Comprar Agora</button>
+                <a href="https://store.steampowered.com/app/2183900/Warhammer_40000_Space_Marine_2/"><button>Comprar Agora</button></a>
             </div>
             <div class="game">
-                <img src="img/Civilization_VI_capa.jpg" alt="Sid Meier's Civilization VI">
-                <h3>Sid Meier's Civilization VI</h3>
+                <img src="img/Frostpunk_2_capa.jpg" alt="Sid Meier's Civilization VI">
+                <h3>Frostpunk 2</h3>
                 <p class="description">Construa um império que resista ao teste do tempo, desde a Idade da Pedra até o futuro.</p>
                 <button class="read-more">Ler mais</button>
-                <div class="price">R$ 199,90</div>
-                <button>Comprar Agora</button>
+                <div class="price">R$ 95,96</div>
+                <a href="https://store.steampowered.com/app/1601580/Frostpunk_2/"><button>Comprar Agora</button></a>
             </div>
             <div class="game">
                 <img src="img/Cities_Skylines_capa.jpg" alt="Cities: Skylines">
@@ -783,23 +1046,23 @@
                 <h3>Fallout 4</h3>
                 <p class="description">Sobreviva em um mundo pós-apocalíptico, tomando decisões que moldam sua história.</p>
                 <button class="read-more">Ler mais</button>
-                <div class="price">R$ 89,90</div>
-                <button>Comprar Agora</button>
+                <div class="price">R$ 59,99</div>
+                <a href="https://store.steampowered.com/app/377160/Fallout_4/"><button>Comprar Agora</button></a>
             </div>
             <div class="game">
                 <img src="img/Endless_Space_2_capa.jpg" alt="Endless Space 2">
                 <h3>Endless Space 2</h3>
                 <p class="description">Construa um império espacial em um jogo de estratégia por turnos profundo e envolvente.</p>
                 <button class="read-more">Ler mais</button>
-                <div class="price">R$ 99,90</div>
-                <button>Comprar Agora</button>
+                <div class="price">R$ 79,99</div>
+                <a href="https://store.steampowered.com/app/392110/ENDLESS_Space_2/"><button>Comprar Agora</button></a>
             </div>
         </div>
     </div>
 </div>
 <footer>
 <p>&copy; 2024 Paradise Game. Todos os direitos reservados. Todas as marcas são propriedade dos seus respectivos donos nos EUA e em outros países.
-    IVA incluso em todos os preços onde aplicável.   <a href="index.html">home</a>   |   <a href="politica_privacidade.html">Política de Privacidade</a>  |    <a href="termos_de_servico.html">Termos de Serviço</a>   |   <a href="mais_sobre.html">Mais Sobre</a>   |   <a href="contato.html">Contato</a>
+    IVA incluso em todos os preços onde aplicável.  |   <a href="politica_privacidade.php">Política de Privacidade</a>  |    <a href="termos_de_servico.php">Termos de Serviço</a>  |   <a href="contato.php">Contato</a>
     </p>
 </footer>
 </body>
